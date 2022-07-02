@@ -16,9 +16,6 @@ function MenuChapeau.Closed()
         TriggerEvent('skinchanger:loadSkin', skin)
     end)
     FreezeEntityPosition(PlayerPedId(), false)
-    RenderScriptCams(0, true, 1000)
-    DestroyAllCams(true) 
-    DestroyCam(cam, false)
 end
 
 local helmet_1c, helmet_2c = {}, {}
@@ -37,7 +34,6 @@ GetComponent()
 
 function RageUI.PoolMenus:FoltoneMenuChapeau()
 	MenuChapeau:IsVisible(function(Items)
-        Load()
         Items:AddList("Chapeau n°1 :", helmet_1c, index.helmet_1, nil, { IsDisabled = false }, function(Index, onSelected, onListChange)
             if (onListChange) then
                 index.helmet_1 = Index
@@ -117,28 +113,3 @@ AddEventHandler(("foltone_helmet:nomoney"), function()
         TriggerEvent('skinchanger:loadSkin', skin)
     end)
 end)
-
-function CreateCam()
-	local coords = GetEntityCoords(GetPlayerPed(-1))
-    cam = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', coords.x-0.8, coords.y-0.4, coords.z+0.7, 0.0, 0.0, 0.0, 40.0, true, true)
-    PointCamAtCoord(cam, coords.x, coords.y, coords.z+0.6)
-    RenderScriptCams(true, false, false, true, true)
-end
-
-function Load()
-    FreezeEntityPosition(PlayerPedId(), true) 
-    EnableControlAction(0, 47, true)   
-    if IsDisabledControlPressed(0, 23) then
-        SetEntityHeading(PlayerPedId(), GetEntityHeading(PlayerPedId())-1.5)
-    elseif IsDisabledControlPressed(0, 47) then
-        SetEntityHeading(PlayerPedId(), GetEntityHeading(PlayerPedId())+1.5)
-    elseif IsDisabledControlPressed(0, 11) then
-        SetCamFov(cam, GetCamFov(cam)+0.2)
-    elseif IsDisabledControlPressed(0, 10) then
-        SetCamFov(cam, GetCamFov(cam)-0.2)
-    end
-    MenuChapeau:AddInstructionButton({[1] = GetControlInstructionalButton(0, 47, 0), [2] = "Tourner à Gauche"})
-    MenuChapeau:AddInstructionButton({[1] = GetControlInstructionalButton(0, 23, 0), [2] = "Tourner à Droite"}) 
-    MenuChapeau:AddInstructionButton({[1] = GetControlInstructionalButton(0, 11, 0), [2] = "Dézoom"})
-    MenuChapeau:AddInstructionButton({[1] = GetControlInstructionalButton(0, 10, 0), [2] = "Zoom"})
-end
