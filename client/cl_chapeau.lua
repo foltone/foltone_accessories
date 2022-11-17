@@ -24,13 +24,12 @@ local index = {
     helmet_2 = 0
 }
 
-function GetComponent()
+function GetChapeauComponent()
     local helmet_1Comp = GetNumberOfPedDrawableVariations(PlayerPedId(), 1)
     for i=0, helmet_1Comp, 1 do
         table.insert(helmet_1c, i)
     end
 end  
-GetComponent()
 
 function RageUI.PoolMenus:FoltoneMenuChapeau()
 	MenuChapeau:IsVisible(function(Items)
@@ -87,6 +86,7 @@ Citizen.CreateThread(function()
                     ESX.ShowHelpNotification("Appuyer sur ~g~[E]~s~ pour accéder au ~g~magasin", 1)
                 end
                 if IsControlJustPressed(1, 51) then
+                    GetChapeauComponent()
                     FreezeEntityPosition(PlayerPedId(), true)
                     CreateCam()
                     open = true

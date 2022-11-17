@@ -24,13 +24,12 @@ local index = {
     ears_2 = 0
 }
 
-function GetComponent()
+function GetOreilleComponent()
     local ears_1Comp = GetNumberOfPedDrawableVariations(PlayerPedId(), 1)
     for i=0, ears_1Comp, 1 do
         table.insert(ears_1c, i)
     end
 end  
-GetComponent()
 
 function RageUI.PoolMenus:FoltoneMenuOreille()
 	MenuOreille:IsVisible(function(Items)
@@ -87,6 +86,7 @@ Citizen.CreateThread(function()
                     ESX.ShowHelpNotification("Appuyer sur ~g~[E]~s~ pour accéder au ~g~magasin", 1)
                 end
                 if IsControlJustPressed(1, 51) then
+                    GetOreilleComponent()
                     FreezeEntityPosition(PlayerPedId(), true)
                     CreateCam()
                     open = true

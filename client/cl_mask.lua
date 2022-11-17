@@ -24,13 +24,12 @@ local index = {
     mask_2 = 0
 }
 
-function GetComponent()
+function GetMasqueComponent()
     local mask_1Comp = GetNumberOfPedDrawableVariations(PlayerPedId(), 1)
     for i=0, mask_1Comp, 1 do
         table.insert(mask_1c, i)
     end
 end  
-GetComponent()
 
 function RageUI.PoolMenus:FoltoneMenuMask()
 	MenuMask:IsVisible(function(Items)
@@ -87,6 +86,7 @@ Citizen.CreateThread(function()
                     ESX.ShowHelpNotification("Appuyer sur ~g~[E]~s~ pour accéder au ~g~magasin", 1)
                 end
                 if IsControlJustPressed(1, 51) then
+                    GetMasqueComponent()
                     FreezeEntityPosition(PlayerPedId(), true)
                     CreateCam()
                     open = true

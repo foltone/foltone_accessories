@@ -24,13 +24,12 @@ local index = {
     glasses_2 = 0
 }
 
-function GetComponent()
+function GetLunetteComponent()
     local glasses_1Comp = GetNumberOfPedDrawableVariations(PlayerPedId(), 1)
     for i=0, glasses_1Comp, 1 do
         table.insert(glasses_1c, i)
     end
 end  
-GetComponent()
 
 function RageUI.PoolMenus:FoltoneMenuLunette()
 	MenuLunette:IsVisible(function(Items)
@@ -87,6 +86,7 @@ Citizen.CreateThread(function()
                     ESX.ShowHelpNotification("Appuyer sur ~g~[E]~s~ pour accéder au ~g~magasin", 1)
                 end
                 if IsControlJustPressed(1, 51) then
+                    GetLunetteComponent()
                     FreezeEntityPosition(PlayerPedId(), true)
                     CreateCam()
                     open = true
